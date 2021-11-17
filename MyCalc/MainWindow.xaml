@@ -1,0 +1,338 @@
+﻿<Window x:Class="MyCalc.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyCalc"
+        mc:Ignorable="d"
+        Background="#F0F0F0"
+        WindowStartupLocation="CenterScreen"
+        Title="MyCalc" Height="530" Width="500">
+    
+    <!--Ressource-->
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="StyleButton">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" >
+                        <GradientStop Color="#FFD2D2D2" Offset="1"/>
+                        <GradientStop Color="#FFEAEAEA" Offset="0"/>
+                        <GradientStop Color="Gainsboro" Offset="0.522"/>
+                        <GradientStop Color="#FFD2D2D2" Offset="0.527"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Foreground" Value="#FFF91B16" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+            <Setter Property="Template" >
+                <Setter.Value >
+                    <ControlTemplate TargetType="Button" >
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="3"
+                            BorderBrush="Black"
+                            BorderThickness="1,1,1,1" >
+                            <ContentPresenter 
+                                x:Name="contentPresenter"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Content="{TemplateBinding Content}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                Margin="{TemplateBinding Padding}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF86B8D4"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
+    <StackPanel
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch">
+        
+        <!--Screen-->
+        <StackPanel
+            Height="100"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center"
+            Orientation="Vertical">
+            <Border
+                Background="White"
+                CornerRadius="5" Height="55"
+                BorderThickness="1,2,1,1"
+                BorderBrush="#FF4584B6"
+                HorizontalAlignment="Stretch"
+                Margin="10,20,10,0"
+                Focusable="True">
+                <TextBlock
+                    x:Name="Screen" 
+                    FontFamily="Arial"
+                    HorizontalAlignment="Stretch"
+                    Text="0"
+                    TextAlignment="Right"
+                    FontSize="48"
+                    VerticalAlignment="Center"
+                    Focusable="True" Margin="0,0,5,0"/>
+            </Border>
+        </StackPanel>
+        
+        <!-- Indicateur / del / CE / C -->
+        <StackPanel 
+            Height="80" 
+        >
+            <Grid Height="80">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="83*"></ColumnDefinition>
+                    <ColumnDefinition Width="83*"></ColumnDefinition>
+                    <ColumnDefinition Width="83*"></ColumnDefinition>
+                    <ColumnDefinition Width="83*"></ColumnDefinition>
+                    <ColumnDefinition Width="83*"></ColumnDefinition>
+                    <ColumnDefinition Width="83*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <!--Indicateur op-->
+                <Button
+                    x:Name="BtnOP"
+                    Content="NaN"
+                    Grid.Column="0" 
+                    IsEnabled="False"
+                    Margin="10,10,10,10"
+                    Background="#FFF0F0F0"
+                    BorderThickness="2,2,1,1"/>
+                
+                <Button
+                    Click="BtnBack_Click"
+                    x:Name="BtnBack"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Style="{StaticResource StyleButton}"
+                    Content="Retour arrière" />
+            
+                <Grid Grid.Column="3" Grid.ColumnSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button
+                        Click="BtnCE_Click"
+                        Grid.Column="0" 
+                        x:Name="BtnCE"
+                        Style="{StaticResource StyleButton}"
+                        Content="CE" />
+                    
+                    <Button
+                        Click="BtnC_Click"
+                        Grid.Column="1" 
+                        x:Name="BtnC"
+                        Style="{StaticResource StyleButton}"
+                        Content="C" />
+                </Grid>
+            </Grid>
+            
+        </StackPanel>
+        <Grid Height="300">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <!--Ligne 1-->
+            <Button
+                Click="BtnToDo_Click"
+                Grid.Column="0"
+                Grid.Row="0" 
+                x:Name="BtnMc"
+                Style="{StaticResource StyleButton}"
+                Content="MC" />
+            <Button
+                Click="BtnNumber_Click"
+                Grid.Column="1"
+                Grid.Row="0"
+                x:Name="BtnSept" 
+                Foreground="#0669CC"
+                Style="{StaticResource StyleButton}"
+                Content="7" />
+            <Button
+                Click="BtnNumber_Click"
+                Grid.Column="2"
+                Grid.Row="0" 
+                x:Name="BtnHuit"
+                Foreground="#0669CC"
+                Style="{StaticResource StyleButton}"
+                Content="8"
+                />
+            <Button
+                Click="BtnNumber_Click"
+                Grid.Column="3"
+                Grid.Row="0" 
+                x:Name="BtnNeuf"
+                Foreground="#0669CC"
+                Style="{StaticResource StyleButton}"
+                Content="9" />
+            <Button
+                Click="BtnOperation_Click"
+                Grid.Column="4"
+                Grid.Row="0"
+                x:Name="BtnDiv"
+                Style="{StaticResource StyleButton}"
+                Content="/" />
+
+            <!--Ligne 2-->
+            <Button
+                Click="BtnToDo_Click"
+                Grid.Column="0"
+                Grid.Row="1" 
+                x:Name="BtnMr"
+                Style="{StaticResource StyleButton}"
+                Content="MR"
+            />
+            <Button
+                Click="BtnNumber_Click"
+                Grid.Column="1"
+                Grid.Row="1" 
+                x:Name="BtnQuatre"
+                Foreground="#0669CC"
+                Style="{StaticResource StyleButton}"
+                Content="4" />
+            <Button
+                Click="BtnNumber_Click"
+                Grid.Column="2"
+                Grid.Row="1"
+                x:Name="BtnCinq"
+                Foreground="#0669CC"
+                Style="{StaticResource StyleButton}"
+                Content="5"
+            />
+            <Button
+                Click="BtnNumber_Click"
+                Grid.Column="3"
+                Grid.Row="1"
+                x:Name="BtnSix"
+                Foreground="#0669CC"
+                Style="{StaticResource StyleButton}"
+                Content="6"
+            />
+            <Button
+                Click="BtnOperation_Click"
+                Grid.Column="4"
+                Grid.Row="1"
+                x:Name="BtnMul"
+                Style="{StaticResource StyleButton}"
+                Content="*" />
+
+            <!--Ligne 3-->
+            <Button
+                Click="BtnToDo_Click"
+                Grid.Column="0"
+                Grid.Row="2" 
+                x:Name="BtnMs"
+                Style="{StaticResource StyleButton}"
+                Content="MS" />
+            <Button
+                Click="BtnNumber_Click"
+                Grid.Column="1"
+                Grid.Row="2" 
+                x:Name="BtnUn"
+                Foreground="#0669CC"
+                Style="{StaticResource StyleButton}"
+                Content="1"
+             />
+            <Button
+                Click="BtnNumber_Click"
+                Grid.Column="2"
+                Grid.Row="2"
+                x:Name="BtnDeux"
+                Foreground="#0669CC"
+                Style="{StaticResource StyleButton}"
+                Content="2"
+            />
+            <Button
+                Click="BtnNumber_Click"
+                Grid.Column="3"
+                Grid.Row="2"
+                x:Name="BtnTrois"
+                Foreground="#0669CC"
+                Style="{StaticResource StyleButton}"
+                Content="3"
+            />
+            <Button
+                Click="BtnOperation_Click"
+                Grid.Column="4"
+                Grid.Row="2"
+                x:Name="BtnMoins"
+                Style="{StaticResource StyleButton}"
+                Content="-" />
+
+            <!--Ligne 4-->
+            <Button
+                Click="BtnToDo_Click"
+                Grid.Column="0"
+                Grid.Row="3" 
+                x:Name="BtnMPlus"
+                Style="{StaticResource StyleButton}"
+                Content="M+" />
+            <Button
+                Click="BtnNumber_Click"
+                Grid.Column="1"
+                Grid.Row="3" 
+                x:Name="BtnZero"
+                Foreground="#0669CC"
+                Style="{StaticResource StyleButton}"
+                Content="0" />
+            <Button
+                Click="BtnPlusMoins_Click"
+                Grid.Column="2"
+                Grid.Row="3"
+                x:Name="BtnPlusMoins"
+                Foreground="#0669CC"
+                Style="{StaticResource StyleButton}"
+                Content="+/-" />
+            <Button
+                Click="BtnNumber_Click"
+                Grid.Column="3"
+                Grid.Row="3"
+                x:Name="BtnPoint"
+                Foreground="#0669CC"
+                Style="{StaticResource StyleButton}"
+                Content="." />
+            <Button
+                Click="BtnOperation_Click"
+                Grid.Column="4"
+                Grid.Row="3"
+                x:Name="BtnPlus"
+                Style="{StaticResource StyleButton}"
+                Content="+"
+             />
+            <Button
+                Click="BtnEgale_Click"
+                Grid.Column="5"
+                Grid.Row="3"
+                x:Name="BtnEgale"
+                Style="{StaticResource StyleButton}"
+                Content="="
+                />
+        </Grid>
+    </StackPanel>
+</Window>
