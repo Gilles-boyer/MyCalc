@@ -9,14 +9,10 @@
 
   <ItemGroup>
     <None Remove="Calculator_31111.ico" />
-    <None Remove="calculatrice.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Calculator_31111.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="calculatrice.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
