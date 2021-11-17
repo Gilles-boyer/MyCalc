@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:MyCalc"
         mc:Ignorable="d"
         Background="#F0F0F0"
+        KeyDown="Window_KeyDown"
         WindowStartupLocation="CenterScreen"
         Title="MyCalc" Height="530" Width="500">
     

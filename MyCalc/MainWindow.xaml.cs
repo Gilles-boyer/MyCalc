@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MyCalc
 {
@@ -120,6 +109,65 @@ namespace MyCalc
                 Screen.Text = NumberA = Operation.ToDoOperation(NumberA, Screen.Text, OperationCal);
                 TemporyResult = false;
                 OperationCal = null;
+            }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            Trace.WriteLine(e.Key);
+            switch (e.Key)
+            {
+                case Key.NumPad0:
+                    BtnZero.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad1:
+                    BtnUn.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad2:
+                    BtnDeux.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad3:
+                    BtnTrois.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad4:
+                    BtnQuatre.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad5:
+                    BtnCinq.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad6:
+                    BtnSix.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad7:
+                    BtnSept.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad8:
+                    BtnHuit.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad9:
+                    BtnNeuf.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.Add:
+                    BtnPlus.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.Subtract:
+                    BtnMoins.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.Multiply:
+                    BtnMul.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.Divide:
+                    BtnDiv.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.Delete:
+                    BtnC.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.Back:
+                    BtnBack.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.Return:
+                    BtnEgale.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
             }
         }
     }
