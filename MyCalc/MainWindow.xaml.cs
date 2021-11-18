@@ -1,7 +1,16 @@
 ﻿using System.Diagnostics;
+using System.Net;
+using System.Reflection;
 using System.Windows;
+using System.Windows.Automation.Peers;
+using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json.Linq;
 
 namespace MyCalc
 {
@@ -14,10 +23,36 @@ namespace MyCalc
         private string OperationCal { get; set; } = null;
         private bool TemporyResult { get; set; } = false;
         private readonly Operation Operation = new();
+        private bool activate = false;
+
+        private bool GetActivate()
+        {
+            return activate;
+        }
+
+        private void SetActivate(bool value)
+        {
+            activate = value;
+        }
 
         public MainWindow()
         {
             InitializeComponent();
+
+            if (!GetActivate())
+            {
+                Screen.Visibility = Visibility.Hidden;
+            }
+            GetApiResponse("stin");
+        }
+
+        private void GetApiResponse(string key)
+        {
+            using (WebClient api = new WebClient())
+            {
+                var JsonString = api.DownloadString("https://randomuser.me/api/?password=upper,lower,1-16");
+                Trace.WriteLine(JsonString);
+            }     
         }
 
         /// <summary>
@@ -109,64 +144,66 @@ namespace MyCalc
                 Screen.Text = NumberA = Operation.ToDoOperation(NumberA, Screen.Text, OperationCal);
                 TemporyResult = false;
                 OperationCal = null;
+                BtnOP.Content = "=";
             }
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            Trace.WriteLine(e.Key);
+            e.Handled = true;
+
             switch (e.Key)
             {
                 case Key.NumPad0:
-                    BtnZero.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnZero.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
                 case Key.NumPad1:
-                    BtnUn.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnUn.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
                 case Key.NumPad2:
-                    BtnDeux.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnDeux.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
                 case Key.NumPad3:
-                    BtnTrois.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnTrois.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
                 case Key.NumPad4:
-                    BtnQuatre.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnQuatre.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
                 case Key.NumPad5:
-                    BtnCinq.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnCinq.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
                 case Key.NumPad6:
-                    BtnSix.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnSix.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
                 case Key.NumPad7:
-                    BtnSept.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnSept.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
                 case Key.NumPad8:
-                    BtnHuit.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnHuit.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
                 case Key.NumPad9:
-                    BtnNeuf.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnNeuf.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
                 case Key.Add:
-                    BtnPlus.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnPlus.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
                 case Key.Subtract:
-                    BtnMoins.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnMoins.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
                 case Key.Multiply:
-                    BtnMul.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnMul.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
                 case Key.Divide:
-                    BtnDiv.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnDiv.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
                 case Key.Delete:
-                    BtnC.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnC.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
                 case Key.Back:
-                    BtnBack.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnBack.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
                 case Key.Return:
-                    BtnEgale.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    BtnEgale.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
             }
         }
