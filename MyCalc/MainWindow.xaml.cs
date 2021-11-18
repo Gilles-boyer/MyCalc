@@ -24,8 +24,9 @@ namespace MyCalc
     public partial class MainWindow : Window
     {
         private string NumberA { get; set; } = null;
-        private string OperationCal { get; set; } = null;
+        private string OperationCal { get; set; } = null;   
         private bool TemporyResult { get; set; } = false;
+        private bool End { get; set; } = false;
         private readonly Operation Operation = new();
         private bool activate { get; set; } = false;
 
@@ -33,11 +34,11 @@ namespace MyCalc
         {
             InitializeComponent();
 
-            if (!activate)
-            {
-                Screen.Visibility = Visibility.Hidden;
-            }
-            GetApiResponse("stin");
+            //if (!activate)
+            //{
+            //    Screen.Visibility = Visibility.Hidden;
+            //}
+            //GetApiResponse("stin");
         }
 
         private static void GetApiResponse(string key)
@@ -97,6 +98,7 @@ namespace MyCalc
 
         private void BtnC_Click(object sender, RoutedEventArgs e)
         {
+            ScreenOp.Text = "";
             BtnOP.Content = "NaN";
             NumberA = null;
             OperationCal = null;
@@ -108,6 +110,25 @@ namespace MyCalc
         {
             string operation = ElementPress((Button)sender);
 
+            if (End)
+            {
+                ScreenOp.Text = Screen.Text + " " + operation;
+                End = false;
+            }
+            else
+            {
+                if (NumberA != null && OperationCal != null)
+                {
+                    ScreenOp.Text += " " + Screen.Text;
+                    End = true;
+                }
+                else
+                {
+                    ScreenOp.Text = Screen.Text + " " + operation;
+                }
+            }
+
+
             if (!TemporyResult)
             {
                 if (NumberA != null && OperationCal != null)
@@ -115,10 +136,11 @@ namespace MyCalc
                     Screen.Text = Operation.ToDoOperation(NumberA, Screen.Text, OperationCal);
                 }
 
+                
                 NumberA = Screen.Text;
                 TemporyResult = true;
             }
-
+            
             BtnOP.Content = operation;
             OperationCal = operation;
         }
@@ -141,6 +163,8 @@ namespace MyCalc
         {
             if (NumberA != null)
             {
+                ScreenOp.Text += " " + Screen.Text;
+                End = true;
                 Screen.Text = NumberA = Operation.ToDoOperation(NumberA, Screen.Text, OperationCal);
                 TemporyResult = false;
                 OperationCal = null;

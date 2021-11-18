@@ -9,7 +9,7 @@
         KeyDown="Window_KeyDown"
         WindowStartupLocation="CenterScreen"
         Title="MyCalc" Height="530" Width="500">
-    
+
     <!--Ressource-->
     <Window.Resources>
         <Style TargetType="Button" x:Key="StyleButton">
@@ -56,11 +56,11 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    
+
     <StackPanel
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch">
-        
+
         <!--Screen-->
         <StackPanel
             Height="100"
@@ -69,24 +69,33 @@
             Orientation="Vertical">
             <Border
                 Background="White"
-                CornerRadius="5" Height="55"
+                CornerRadius="5" Height="80"
                 BorderThickness="1,2,1,1"
                 BorderBrush="#FF4584B6"
                 HorizontalAlignment="Stretch"
-                Margin="10,20,10,0"
+                Margin="10,10,10,0"
                 Focusable="True">
+                <StackPanel>
+                <TextBlock
+                    x:Name="ScreenOp" 
+                    FontFamily="Arial"
+                    TextAlignment="Right"
+                    FontSize="18"
+                    VerticalAlignment="Bottom"
+                    Focusable="True" Margin="0,0,10
+                    ,0" Height="20" HorizontalAlignment="Stretch"/>
                 <TextBlock
                     x:Name="Screen" 
                     FontFamily="Arial"
-                    HorizontalAlignment="Stretch"
                     Text="0"
                     TextAlignment="Right"
                     FontSize="48"
-                    VerticalAlignment="Center"
-                    Focusable="True" Margin="0,0,5,0"/>
+                    VerticalAlignment="Bottom"
+                    Focusable="True" Margin="0,0,5,0" Height="49" HorizontalAlignment="Stretch"/>
+                </StackPanel>
             </Border>
         </StackPanel>
-        
+
         <!-- Indicateur / del / CE / C -->
         <StackPanel 
             Height="80" 
@@ -100,7 +109,7 @@
                     <ColumnDefinition Width="83*"></ColumnDefinition>
                     <ColumnDefinition Width="83*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                
+
                 <!--Indicateur op-->
                 <Button
                     x:Name="BtnOP"
@@ -110,7 +119,7 @@
                     Margin="10,10,10,10"
                     Background="#FFF0F0F0"
                     BorderThickness="2,2,1,1"/>
-                
+
                 <Button
                     Click="BtnBack_Click"
                     x:Name="BtnBack"
@@ -118,21 +127,21 @@
                     Grid.ColumnSpan="2"
                     Style="{StaticResource StyleButton}"
                     Content="Retour arrière" />
-            
+
                 <Grid Grid.Column="3" Grid.ColumnSpan="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition Width="40"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    
+
                     <Button
                         Click="BtnCE_Click"
                         Grid.Column="0" 
                         x:Name="BtnCE"
                         Style="{StaticResource StyleButton}"
                         Content="CE" />
-                    
+
                     <Button
                         Click="BtnC_Click"
                         Grid.Column="1" 
@@ -141,7 +150,7 @@
                         Content="C" />
                 </Grid>
             </Grid>
-            
+
         </StackPanel>
         <Grid Height="300">
             <Grid.ColumnDefinitions>
@@ -158,7 +167,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            
+
             <!--Ligne 1-->
             <Button
                 Click="BtnToDo_Click"
