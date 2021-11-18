@@ -23,3 +23,7 @@ La calculatrice ressemblera donc à ceci :
 	- Création des mèthodes : MC/MR/MS/M+
 	- Avoir un Historique d'affichage
 	- Créer un système de licence utilisateur avec une api
+
+## Api test pour login en post:
+https://apimycalc974.000webhostapp.com/
+Creation d'un fichier dans le dossier doc pour simuler la connexion avec une api avec une requete post 

@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
+using System.Collections.Specialized;
+using System.Text;
+using System;
+using RestSharp;
 
 namespace MyCalc
 {
@@ -23,36 +27,32 @@ namespace MyCalc
         private string OperationCal { get; set; } = null;
         private bool TemporyResult { get; set; } = false;
         private readonly Operation Operation = new();
-        private bool activate = false;
-
-        private bool GetActivate()
-        {
-            return activate;
-        }
-
-        private void SetActivate(bool value)
-        {
-            activate = value;
-        }
+        private bool activate { get; set; } = false;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            if (!GetActivate())
+            if (!activate)
             {
                 Screen.Visibility = Visibility.Hidden;
             }
             GetApiResponse("stin");
         }
 
-        private void GetApiResponse(string key)
+        private static void GetApiResponse(string key)
         {
-            using (WebClient api = new WebClient())
+            var client = new RestClient("https://apimycalc974.000webhostapp.com/")
             {
-                var JsonString = api.DownloadString("https://randomuser.me/api/?password=upper,lower,1-16");
-                Trace.WriteLine(JsonString);
-            }     
+                Timeout = -1
+            };
+            var request = new RestRequest(Method.POST)
+            {
+                AlwaysMultipartFormData = true
+            };
+            request.AddParameter("key", "396bebd7-5831-416c-9560-ea5b44ac5301");
+
+            IRestResponse response = client.Execute(request);
         }
 
         /// <summary>
@@ -151,7 +151,6 @@ namespace MyCalc
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = true;
-
             switch (e.Key)
             {
                 case Key.NumPad0:
@@ -204,6 +203,9 @@ namespace MyCalc
                     break;
                 case Key.Return:
                     BtnEgale.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
+                    break;
+                case Key.Decimal:
+                    BtnPoint.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
                     break;
             }
         }
