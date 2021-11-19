@@ -1,5 +1,13 @@
 ﻿# Premiers Pas en C#
 
+## Pour Générer le Projet : 
+### Prérequis :
+ - Avoir Visual Studio
+### Process : 
+- git Clone du projet de
+- Ouvrir le projet avec visual studio : Fichier=>Ouvir=>Projet/Solution =>MyCalc.csproj
+- Dans l'explorateur de solution Click Droit sur MyCalc => Regénérer
+
 ## Detail du Projet :
 Il s’agit d'écrire un programme qui fasse la même chose que la Calculatrice livrée avec Windows, dans sa version "standard". </br>
 Pour simplifier encore un peu le développement On ne développera pas le menu, ni l’aide, ni les fonctions suivantes : 
@@ -15,7 +23,7 @@ Pour simplifier encore un peu le développement On ne développera pas le menu, 
 	- Tous les buttons doit fonctionner correctement.
 
 ## Difficulté :
-	- L'apprentissage d'un nouveau langage
+	- L'apprentissage d'un nouveau language
 	- Les notions des éléments graphiques xaml
 	- Logique de gestion du fonctionnement
 
