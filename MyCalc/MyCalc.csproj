@@ -5,6 +5,9 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Calculator_31111.ico</ApplicationIcon>
+    <Authors>Gilles BOYER</Authors>
+    <Description>Calculatrice de démonstration pour apprentissage du c#</Description>
+    <Copyright>2021</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

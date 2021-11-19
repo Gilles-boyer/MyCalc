@@ -1,4 +1,4 @@
-﻿<Window x:Class="MyCalc.MainWindow"
+﻿<Window x:Name="calcWindows" x:Class="MyCalc.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -56,10 +56,58 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-
     <StackPanel
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch">
+
+        <StackPanel 
+            x:Name="LicenceBlock"
+            Height="0"
+            Visibility="Hidden"
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Center">
+            <Label 
+                x:Name="LabelLicence"
+                HorizontalContentAlignment="Center" 
+                FontSize="18" 
+                FontFamily="Arial" 
+                FontWeight="Bold" 
+                Foreground="#FFDE2B2B">
+                Merci de Saisir votre licence :
+            </Label>
+            <TextBox 
+                x:Name="LicenceText" 
+                Height="50" 
+                Width="408" 
+                Background="White" 
+                HorizontalAlignment="Center" 
+                TextAlignment="Center" 
+                Margin="0,0,0,0" 
+                FontFamily="Arial" 
+                FontSize="18" 
+                FontWeight="Bold" 
+                VerticalAlignment="Center" 
+                VerticalContentAlignment="Center" 
+                HorizontalContentAlignment="Center"/>
+            <StackPanel 
+                Orientation="Horizontal" 
+                VerticalAlignment="Stretch" 
+                HorizontalAlignment="Center">
+                <Button
+                    Click="ValidLicence_Click"
+                    x:Name="ValidLicence"
+                    Width="100" 
+                    Style="{StaticResource StyleButton}" 
+                    Content="Valider" />
+                <Button
+                    x:Name="CloseLicence"
+                    Click="CloseLicence_Click"
+                    Foreground="Blue" 
+                    Width="100" 
+                    Style="{StaticResource StyleButton}" 
+                    Content="Fermer" />
+            </StackPanel>
+        </StackPanel>
 
         <!--Screen-->
         <StackPanel
@@ -76,16 +124,18 @@
                 Margin="10,10,10,0"
                 Focusable="True">
                 <StackPanel>
-                <TextBlock
-                    x:Name="ScreenOp" 
+                    <TextBlock
+                    x:Name="ScreenOp"
+                    Visibility="Hidden"
                     FontFamily="Arial"
                     TextAlignment="Right"
                     FontSize="18"
                     VerticalAlignment="Bottom"
                     Focusable="True" Margin="0,0,10
                     ,0" Height="20" HorizontalAlignment="Stretch"/>
-                <TextBlock
-                    x:Name="Screen" 
+                    <TextBlock
+                    x:Name="Screen"
+                    Visibility="Hidden"
                     FontFamily="Arial"
                     Text="0"
                     TextAlignment="Right"
