@@ -13,7 +13,7 @@ Il s’agit d'écrire un programme qui fasse la même chose que la Calculatrice 
 Pour simplifier encore un peu le développement On ne développera pas le menu, ni l’aide, ni les fonctions suivantes : 
 "MC", "MR", "MS"."M+" 
 </br> La calculatrice ressemblera donc à ceci :</br>
-![Calculatrice](calculatrice.png)
+![Calculatrice](img/calculatrice.png)
 
 ## Contrainte :
 	- Projet à effectuer en une journée
@@ -43,3 +43,18 @@ Token Test : "396bebd7-5831-416c-9560-ea5b44ac5301"
 -> Traitement l'affichage en String</br>
 -> Utilisation de double pour faire les opérations</br>
 -> opération de type a + b = ab ensuite a = ab</br>
+
+## Screen Application
+
+### First Start App : 
+![FirstStart](img/firstStart.png)
+### Click "Alt" pour afficher l'espace licence:
+![ClickAlt](img/clickAlt.png)
+### Test si licence est vide:
+![LicenceEmpty](img/licenceEmpty.png)
+### Test si licence n'est pas Valide:
+![LicenceNotGood](img/licenceNotGood.png)
+### Licence Valide : 
+![FirstStart](img/licenceGreat.png)
+### Enjoy : 
+![FirstStart](img/enjoy.png)
