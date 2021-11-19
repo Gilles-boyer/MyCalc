@@ -25,6 +25,10 @@ namespace MyCalc
             TryLicenceCheck();
         }
 
+        /// <summary>
+        /// check licence var environnement system windows user
+        /// and if success configue app
+        /// </summary>
         private void TryLicenceCheck()
         {
             try
@@ -49,7 +53,11 @@ namespace MyCalc
             }
         }
 
-
+        /// <summary>
+        /// call api for verify licence key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns>Response (success ou failed)</returns>
         private static string GetApiResponse(string key)
         {
             RestClient client = new("https://apimycalc974.000webhostapp.com/")
@@ -77,6 +85,11 @@ namespace MyCalc
             return sender.Content.ToString();
         }
 
+        /// <summary>
+        /// print number in screen when user click key number
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnNumber_Click(object sender, RoutedEventArgs e)
         {
             string number = ElementPress((Button)sender);
@@ -97,16 +110,31 @@ namespace MyCalc
             }
         }
 
+        /// <summary>
+        /// delete last character on screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             Screen.Text = Screen.Text.Length <= 1 ? "0" : Screen.Text.Remove(Screen.Text.Length - 1);
         }
 
+        /// <summary>
+        /// purge screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnCE_Click(object sender, RoutedEventArgs e)
         {
             Screen.Text = "0";
         }
 
+        /// <summary>
+        /// purge all operation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnC_Click(object sender, RoutedEventArgs e)
         {
             ScreenOp.Text = "";
@@ -117,6 +145,11 @@ namespace MyCalc
             Screen.Text = "0";
         }
 
+        /// <summary>
+        /// execute operation with number a and b = Screen.Text
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnOperation_Click(object sender, RoutedEventArgs e)
         {
             string operation = ElementPress((Button)sender);
@@ -145,9 +178,7 @@ namespace MyCalc
                 if (NumberA != null && OperationCal != null)
                 {
                     Screen.Text = Operation.ToDoOperation(NumberA, Screen.Text, OperationCal);
-                }
-
-                
+                }             
                 NumberA = Screen.Text;
                 TemporyResult = true;
             }
@@ -156,12 +187,23 @@ namespace MyCalc
             OperationCal = operation;
         }
 
+        /// <summary>
+        ///  Tempory fonction for to brain don't forget this task
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnToDo_Click(object sender, RoutedEventArgs e)
         {
             string value = ElementPress((Button)sender);
             _ = MessageBox.Show("ToDo: Méthode Pour Bouton " + value + " à Créer", "ToDo", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
+        /// <summary>
+        /// change value on screen (if value is positif retur same value to negatif and
+        /// if value is negatif return same value to positif)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnPlusMoins_Click(object sender, RoutedEventArgs e)
         {
             if (Screen.Text != "0")
@@ -169,7 +211,12 @@ namespace MyCalc
                 Screen.Text = Screen.Text.Contains("-") ? Screen.Text.Trim('-') : Screen.Text.Insert(0, "-");
             }
         }
-
+        
+        /// <summary>
+        /// take operation and print result on screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnEgale_Click(object sender, RoutedEventArgs e)
         {
             if (NumberA != null)
@@ -182,11 +229,12 @@ namespace MyCalc
                 BtnOP.Content = "=";
             }
         }
-        private void WindowLicence_KeyDown(object sender, KeyEventArgs e)
-        {
-            LicenceText.Text = e.Key.ToString();
-        }
 
+        /// <summary>
+        /// dictionnary of key word with app
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
 
@@ -255,6 +303,11 @@ namespace MyCalc
             }
         }
 
+        /// <summary>
+        /// close windows licence
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseLicence_Click(object sender, RoutedEventArgs e)
         {
             LicenceBlock.Height = 0;
@@ -262,6 +315,11 @@ namespace MyCalc
             calcWindows.KeyDown += Window_KeyDown;
         }
 
+        /// <summary>
+        /// verify licenceText and verify licence key is correct
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ValidLicence_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(LicenceText.Text))
